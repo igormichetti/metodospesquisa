@@ -1,29 +1,35 @@
-// Criado por IGOR MICHETTI e IEDA MARILIA DOS ANJOS AZEVEDO
-public class No<T> {
-    
-    private T info;
-    private No<T> proximo;
+public class BubbleSort {
+    public static void main(String[] args) {
+        int[] vetor = {3, 6, 8, 1, 4, 9, 0};
 
-    public No(T info) {
-        this.info = info;
-        this.proximo = null;
-    }
+        System.out.println("Vetor original:");
+        imprimirVetor(vetor);
 
-    public No(T info, No<T> proximo) {
-        this.info = info;
-        this.proximo = proximo;
+        bubbleSort(vetor, vetor.length);
+
+        System.out.println("Vetor ordenado:");
+        imprimirVetor(vetor);
     }
 
-    public T getInfo() {
-        return info;
+    public static void bubbleSort(int[] vetor, int n) {
+        if (n == 1)
+            return;
+
+        for (int i = 0; i < n - 1; i++) {
+            if (vetor[i] > vetor[i + 1]) {
+                int temp = vetor[i];
+                vetor[i] = vetor[i + 1];
+                vetor[i + 1] = temp;
+            }
+        }
+
+        bubbleSort(vetor, n - 1);
     }
-    public void setInfo(T info) {
-        this.info = info;
-    }
-    public No<T> getProximo() {
-        return proximo;
-    }
-    public void setProximo(No<T> proximo) {
-        this.proximo = proximo;
+
+    public static void imprimirVetor(int[] vetor) {
+        for (int elemento : vetor) {
+            System.out.print(elemento + " ");
+        }
+        System.out.println();
     }
 }

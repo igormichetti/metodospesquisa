@@ -1,49 +1,71 @@
-// Criado por IGOR MICHETTI e IEDA MARILIA DOS ANJOS AZEVEDO
-public class Teste {
+import java.util.Arrays;
+import java.util.Random;
 
+
+public class SortTest {
     public static void main(String[] args) {
-        Lista<Integer> lista = new Lista<>();
-        // Aqui deve mostrar "true" se a lista estiver vazia
-        System.out.print("\n Aqui deve mostrar 'true' se a lista estiver vazia: ");
-        System.out.print(lista.vazia() + "\n");
+        int[] vetor = gerarVetorAleatorio(1000); // Gera um vetor aleatório com 1000 elementos
 
-        // Inserindo 3 valores
-        lista.inserePrimeiro(1);
-        lista.insereUltimo(6);
-        lista.insereUltimo(12);
-        // Aqui deve mostrar 1 6 12
-        System.out.print("\n Aqui deve mostrar '1 6 12': ");
-        lista.mostrar();
-        
-        lista.insereDepois(1,3) ;
-        lista.insereDepois(2, 93);
-        lista.insereDepois(3, 100);
-        System.out.print("\n Aqui deve mostrar '1 6 3 93 100 12': ");
-        // Aqui deve mostrar 1 6 3 93 100 12
-        lista.mostrar();
+        int[] vetorSelectionSort = vetor.clone(); // Cria uma cópia do vetor para o Selection Sort
+        int[] vetorBubbleSort = vetor.clone(); // Cria uma cópia do vetor para o Bubble Sort
 
-        // Aqui deve mostrar "false" se a lista estiver vazia
-        System.out.print("\n Aqui deve mostrar 'false' se a lista estiver vazia: ");
-        System.out.print(lista.vazia());
+        System.out.println("Vetor original:");
+        imprimirVetor(vetor);
 
-        lista.removeUltimo();
-        // Aqui deve mostrar "1 6 3 93 100" pois removemos o ultimo
-        System.out.print("\n \n Aqui deve mostrar '1 6 3 93 100' pois removemos o ultimo: ");
-        lista.mostrar();
+        // Teste do Selection Sort
+        long selectionSortStartTime = System.nanoTime();
+        SelectionSort.selectionSort(vetorSelectionSort);
+        long selectionSortEndTime = System.nanoTime();
 
-        lista.removePrimeiro();
-        // Aqui deve mostrar "6 3 93 100" pois removemos o primeiro no
-        System.out.print("\n Aqui deve mostrar '6 3 93 100' pois removemos o primeiro: ");
-        lista.mostrar();
+        System.out.println("Vetor ordenado pelo Selection Sort:");
+        imprimirVetor(vetorSelectionSort);
 
-        // Removendo um no especifico
-        No<Integer> noRemover = lista.getPrimeiro().getProximo(); // Vamos usar o segundo no
-        lista.remove(noRemover);
-        // Aqui deve mostrar "6 93 100" pois removemos o segundo no
-        System.out.print(" \n Aqui deve mostrar '6 93 100' pois removemos o segundo: ");
-        lista.mostrar();
+        // Teste do Bubble Sort
+        long bubbleSortStartTime = System.nanoTime();
+        BubbleSort.bubbleSort(vetorBubbleSort, vetorBubbleSort.length);
+        long bubbleSortEndTime = System.nanoTime();
 
-        System.out.print(" \n Acabamos por aqui! \n");
+        System.out.println("Vetor ordenado pelo Bubble Sort:");
+        imprimirVetor(vetorBubbleSort);
 
+        // Verificar se os vetores estão ordenados corretamente
+        boolean selectionSortOrdenado = isOrdenado(vetorSelectionSort);
+        boolean bubbleSortOrdenado = isOrdenado(vetorBubbleSort);
 
-}}
+        System.out.println("Verificação de ordenação:");
+        System.out.println("Selection Sort: " + (selectionSortOrdenado ? "Ordenado" : "Não ordenado"));
+        System.out.println("Bubble Sort: " + (bubbleSortOrdenado ? "Ordenado" : "Não ordenado"));
+
+        // Calcular o tempo de execução de cada algoritmo
+        long selectionSortExecutionTime = selectionSortEndTime - selectionSortStartTime;
+        long bubbleSortExecutionTime = bubbleSortEndTime - bubbleSortStartTime;
+
+        System.out.println("Tempo de execução:");
+        System.out.println("Selection Sort: " + selectionSortExecutionTime + " nanossegundos");
+        System.out.println("Bubble Sort: " + bubbleSortExecutionTime + " nanossegundos");
+    }
+
+    public static int[] gerarVetorAleatorio(int tamanho) {
+        int[] vetor = new int[tamanho];
+        Random random = new Random();
+
+        for (int i = 0; i < tamanho; i++) {
+            vetor[i] = random.nextInt(1000); // Números aleatórios entre 0 e 999
+        }
+
+        return vetor;
+    }
+
+    public static void imprimirVetor(int[] vetor) {
+        System.out.println(Arrays.toString(vetor));
+    }
+
+    public static boolean isOrdenado(int[] vetor) {
+        for (int i = 0; i < vetor.length - 1; i++) {
+            if (vetor[i] > vetor[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
