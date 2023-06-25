@@ -1,3 +1,4 @@
+//Crido por IGOR MICHETTI E IEDA MARILIA DOS ANJOS AZEVEDO
 public class SelectionSort {
     public static void main(String[] args) {
         int[] vetor = {3, 6, 8, 1, 4, 9, 0};
@@ -14,6 +15,7 @@ public class SelectionSort {
     public static void selectionSort(int[] vetor) {
         int n = vetor.length;
 
+        // Encontrar o menor elemento a partir da posição i
         for (int i = 0; i < n - 1; i++) {
             int indiceMinimo = i;
 
@@ -22,7 +24,7 @@ public class SelectionSort {
                     indiceMinimo = j;
                 }
             }
-
+        // Trocar o elemento encontrado pelo menor elemento
             if (indiceMinimo != i) {
                 int temp = vetor[i];
                 vetor[i] = vetor[indiceMinimo];

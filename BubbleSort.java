@@ -1,10 +1,12 @@
+//Crido por IGOR MICHETTI E IEDA MARILIA DOS ANJOS AZEVEDO
 public class BubbleSort {
     public static void main(String[] args) {
         int[] vetor = {3, 6, 8, 1, 4, 9, 0};
 
         System.out.println("Vetor original:");
         imprimirVetor(vetor);
-
+        
+        // Imprimir o vetor ordenado
         bubbleSort(vetor, vetor.length);
 
         System.out.println("Vetor ordenado:");
@@ -12,9 +14,11 @@ public class BubbleSort {
     }
 
     public static void bubbleSort(int[] vetor, int n) {
+        // Caso base: se o tamanho do vetor for 1, já está ordenado 
         if (n == 1)
             return;
 
+        // Percorrer o vetor, comparando e trocando os elementos adjacentes
         for (int i = 0; i < n - 1; i++) {
             if (vetor[i] > vetor[i + 1]) {
                 int temp = vetor[i];
@@ -23,6 +27,7 @@ public class BubbleSort {
             }
         }
 
+        // Chama recursivamente o bubbleSort com um tamanho reduzido
         bubbleSort(vetor, n - 1);
     }
 
